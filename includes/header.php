@@ -72,6 +72,9 @@
                             <a
                                 href="login.html"
                                 class="btn btn-primary border-width-2 d-none d-lg-inline-block"><span class="mr-2 icon-lock_outline"></span>Log In</a>
+                            <a
+                                href="<?php echo APPURL; ?>/auth/register.php"
+                                class="btn btn-primary border-width-2 d-none d-lg-inline-block"><span class="mr-2 icon-lock_outline"></span>Register</a>
                         </div>
                         <a
                             href="#"

@@ -9,5 +9,6 @@ try {
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
     echo $e->getMessage();
-} 
+}
 //  
+define("APPURL", "http://localhost:3000/jobboard");
