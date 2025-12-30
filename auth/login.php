@@ -40,13 +40,13 @@ if (isset($_POST['submit'])) {
 }
 
 ?>
-<section class="section-hero overlay inner-page bg-image" style="background-image: url('../images/hero_1.jpg');" id="home-section">
+<section class="section-hero overlay inner-page bg-image" style="background-image: url('<?php echo APPURL; ?>/images/hero_1.jpg');" id="home-section">
     <div class="container">
         <div class="row">
             <div class="col-md-7">
                 <h1 class="text-white font-weight-bold">Log In</h1>
                 <div class="custom-breadcrumbs">
-                    <a href="#">Home</a> <span class="mx-2 slash">/</span>
+                    <a href="<?php echo APPURL; ?>">Home</a> <span class="mx-2 slash">/</span>
                     <span class="text-white"><strong>Log In</strong></span>
                 </div>
             </div>

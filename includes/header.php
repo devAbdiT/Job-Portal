@@ -70,7 +70,7 @@
                                 href="post-job.html"
                                 class="btn btn-outline-white border-width-2 d-none d-lg-inline-block"><span class="mr-2 icon-add"></span>Post a Job</a>
                             <a
-                                href="login.html"
+                                href="<?php echo APPURL; ?>/auth/login.php"
                                 class="btn btn-primary border-width-2 d-none d-lg-inline-block"><span class="mr-2 icon-lock_outline"></span>Log In</a>
                             <a
                                 href="<?php echo APPURL; ?>/auth/register.php"

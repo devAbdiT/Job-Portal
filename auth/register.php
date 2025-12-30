@@ -15,14 +15,16 @@ if (isset($_POST['submit'])) {
     $password = $_POST['password'];
     $repassword = $_POST['re-password'];
     $img = 'web-coding.png';
+    $type = $_POST['type'];
     //checking for password
     if ($password == $repassword) {
-      $insert = $conn->prepare("INSERT INTO users(username,email,mypassword,img) VALUES (:username,:email,:mypassword,:img)");
+      $insert = $conn->prepare("INSERT INTO users(username,email,mypassword,img,type) VALUES (:username,:email,:mypassword,:img,:type)");
       $insert->execute([
         ':username' => $username,
         ':email' => $email,
         ':mypassword' => password_hash($password, PASSWORD_DEFAULT),
         ':img' => $img,
+        ':type' => $type,
       ]);
       header("location:login.php");
     } else {
@@ -76,6 +78,13 @@ if (isset($_POST['submit'])) {
                 placeholder="Email address"
                 name="email" />
             </div>
+          </div>
+          <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
+            <select name="type" class="selectpicker" data-style="btn-white btn-lg" data-width="100%" data-live-search="true" title="Select User Type">
+              <option>Worker</option>
+              <option>Company</option>
+
+            </select>
           </div>
           <div class="row form-group">
             <div class="col-md-12 mb-3 mb-md-0">
