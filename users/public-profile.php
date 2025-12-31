@@ -39,12 +39,12 @@ require "../includes/header.php";
                 <div class="card p-3 py-4">
 
                     <div class="text-center">
-                        <img src="../user-images/<?php echo $profile->img; ?>" width="100" class="rounded-circle">
+                        <img src="user-images/<?php echo $profile->img; ?>" width="100" class="rounded-circle">
                     </div>
 
                     <div class="text-center mt-3">
                         <?php if (isset($_SESSION['type']) and $_SESSION['type'] == 'Worker') : ?>
-                            <a class="btn btn-success text-white" href="#" role="button" download>Download CV</a>
+                            <a class="btn btn-success text-white" href="user-cvs/<?php echo $profile->cv; ?>" role="button" download>Download CV</a>
                         <?php endif; ?>
                         <h5 class="mt-2 mb-0"><?php echo $profile->username; ?></h5>
                         <?php if (isset($_SESSION['type']) and $_SESSION['type'] == 'Worker') : ?>
