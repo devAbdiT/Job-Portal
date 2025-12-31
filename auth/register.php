@@ -1,11 +1,9 @@
 <?php
 require "../config/config.php";
-?>
-<?php
-require "../includes/header.php"
-?>
 
-<?php
+
+
+
 if (isset($_POST['submit'])) {
   if (empty($_POST['username']) or empty($_POST['email']) or empty($_POST['password']) or empty($_POST['re-password'])) {
     echo "<script>alert('some inputs are empty')</script>";
@@ -32,6 +30,8 @@ if (isset($_POST['submit'])) {
     }
   }
 }
+
+require "../includes/header.php"
 
 ?>
 <!-- HOME -->

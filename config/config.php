@@ -11,4 +11,4 @@ try {
     echo $e->getMessage();
 }
 //  
-define("APPURL", "http://localhost:3000/jobboard");
+// define("APPURL", "http://localhost:3000/jobboard");

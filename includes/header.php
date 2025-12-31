@@ -1,3 +1,10 @@
+<?php
+session_start();
+// define("APPURL", "http://localhost:3000/jobboard");
+if (!defined('APPURL')) {
+    define("APPURL", "http://localhost:3000/jobboard");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,17 +19,17 @@
     <meta name="author" content="Free-Template.co" />
     <link rel="shortcut icon" href="ftco-32x32.png" />
 
-    <link rel="stylesheet" href="../css/custom-bs.css" />
-    <link rel="stylesheet" href="../css/jquery.fancybox.min.css" />
-    <link rel="stylesheet" href="../css/bootstrap-select.min.css" />
-    <link rel="stylesheet" href="../fonts/icomoon/style.css" />
-    <link rel="stylesheet" href="../fonts/line-icons/style.css" />
-    <link rel="stylesheet" href="../css/owl.carousel.min.css" />
-    <link rel="stylesheet" href="../css/animate.min.css" />
-    <link rel="stylesheet" href="../css/quill.snow.css" />
+    <link rel="stylesheet" href="<?php echo APPURL; ?>/css/custom-bs.css" />
+    <link rel="stylesheet" href="<?php echo APPURL; ?>/css/jquery.fancybox.min.css" />
+    <link rel="stylesheet" href="<?php echo APPURL; ?>/css/bootstrap-select.min.css" />
+    <link rel="stylesheet" href="<?php echo APPURL; ?>/fonts/icomoon/style.css" />
+    <link rel="stylesheet" href="<?php echo APPURL; ?>/fonts/line-icons/style.css" />
+    <link rel="stylesheet" href="<?php echo APPURL; ?>/css/owl.carousel.min.css" />
+    <link rel="stylesheet" href="<?php echo APPURL; ?>/css/animate.min.css" />
+    <link rel="stylesheet" href="<?php echo APPURL; ?>/css/quill.snow.css" />
 
     <!-- MAIN CSS -->
-    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="<?php echo APPURL; ?>/css/style.css" />
 </head>
 
 <body id="top">
@@ -56,6 +63,12 @@
                             <li><a href="about.html">About</a></li>
 
                             <li><a href="contact.html">Contact</a></li>
+                            <?php if (isset($_SESSION['username'])): ?>
+                                <li><a href="contact.html"><?php echo $_SESSION['username']; ?></a></li>
+                                <li><a href="<?php echo APPURL ?>/auth/logout.php">logout</a></li>
+                            <?php endif; ?>
+
+
                             <li class="d-lg-none">
                                 <a href="post-job.html"><span class="mr-2">+</span> Post a Job</a>
                             </li>

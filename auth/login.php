@@ -1,12 +1,9 @@
 <?php
 require "../config/config.php";
-?>
-<?php
-require "../includes/header.php"
-?>
 
-<?php
-
+if (!defined('APPURL')) {
+    define("APPURL", "http://localhost:3000/jobboard");
+}
 if (isset($_POST['submit'])) {
     if (empty($_POST['email']) or empty($_POST['password'])) {
         echo "<script>alert('some inputs are empty')</script>";
@@ -29,7 +26,12 @@ if (isset($_POST['submit'])) {
         $select = $login->fetch(PDO::FETCH_ASSOC);
         if ($login->rowCount() > 0) {
             if (password_verify($password, $select['mypassword'])) {
-                echo "LOGGED IN";
+                // echo "LOGGED IN";
+                $_SESSION['username'] = $select['username'];
+                $_SESSION['id'] = $select['id'];
+                $_SESSION['type'] = $select['type'];
+
+                header("location:" . APPURL . "");
             } else {
                 echo "<script>alert('Invalid user')</script>";
             }
@@ -38,6 +40,7 @@ if (isset($_POST['submit'])) {
         }
     }
 }
+require "../includes/header.php"
 
 ?>
 <section class="section-hero overlay inner-page bg-image" style="background-image: url('<?php echo APPURL; ?>/images/hero_1.jpg');" id="home-section">
