@@ -1,4 +1,5 @@
 <?php
+session_start();
 require "../config/config.php";
 
 if (!defined('APPURL')) {
@@ -31,7 +32,8 @@ if (isset($_POST['submit'])) {
                 $_SESSION['id'] = $select['id'];
                 $_SESSION['type'] = $select['type'];
 
-                header("location:" . APPURL . "");
+
+                header("Location: " . APPURL . "/");
             } else {
                 echo "<script>alert('Invalid user')</script>";
             }

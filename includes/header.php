@@ -1,5 +1,5 @@
 <?php
-session_start();
+// session_start();
 // define("APPURL", "http://localhost:3000/jobboard");
 if (!defined('APPURL')) {
     define("APPURL", "http://localhost:3000/jobboard");
@@ -65,7 +65,7 @@ if (!defined('APPURL')) {
                             <li><a href="contact.html">Contact</a></li>
                             <?php if (isset($_SESSION['username'])): ?>
                                 <li><a href="contact.html"><?php echo $_SESSION['username']; ?></a></li>
-                                <li><a href="<?php echo APPURL ?>/auth/logout.php">logout</a></li>
+                                <li><a href="<?php echo APPURL ?>/auth/logout.php">Logout</a></li>
                             <?php endif; ?>
 
 
