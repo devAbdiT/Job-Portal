@@ -5,6 +5,10 @@ require "../config/config.php";
 if (!defined('APPURL')) {
     define("APPURL", "http://localhost:3000/jobboard");
 }
+
+if (isset($_SESSION['username'])) {
+    header("location:" . APPURL . "/");
+}
 if (isset($_POST['submit'])) {
     if (empty($_POST['email']) or empty($_POST['password'])) {
         echo "<script>alert('some inputs are empty')</script>";

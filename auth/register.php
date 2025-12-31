@@ -1,8 +1,15 @@
 <?php
 require "../config/config.php";
+if (!defined('APPURL')) {
+  define("APPURL", "http://localhost:3000/jobboard");
+}
+if (session_status() === PHP_SESSION_NONE) {
+  session_start();
+}
 
-
-
+if (isset($_SESSION['username'])) {
+  header("location:" . APPURL . "/");
+}
 
 if (isset($_POST['submit'])) {
   if (empty($_POST['username']) or empty($_POST['email']) or empty($_POST['password']) or empty($_POST['re-password'])) {
