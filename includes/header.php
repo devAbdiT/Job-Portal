@@ -68,7 +68,7 @@ if (!defined('APPURL')) {
 
                             <?php if (isset($_SESSION['username'])): ?>
                                 <li class="d-lg-inline">
-                                    <a href="post-job.html"><span class="mr-2">+</span> Post a Job</a>
+                                    <a href="<?php echo APPURL; ?>jobs/post-job.php"><span class="mr-2">+</span> Post a Job</a>
                                 </li>
 
                                 <li class="nav-item dropdown">

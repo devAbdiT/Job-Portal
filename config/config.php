@@ -10,8 +10,11 @@ try {
 } catch (PDOException $e) {
     echo $e->getMessage();
 }
-//  
+
 // define("APPURL", "http://localhost:3000/jobboard");
 if (!defined('APPURL')) {
     define("APPURL", "http://localhost:3000/jobboard/");
+}
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
 }

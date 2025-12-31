@@ -35,6 +35,8 @@ if (isset($_POST['submit'])) {
                 $_SESSION['username'] = $select['username'];
                 $_SESSION['id'] = $select['id'];
                 $_SESSION['type'] = $select['type'];
+                $_SESSION['email'] = $select['email'];
+                $_SESSION['image'] = $select['img'];
 
 
                 header("Location: " . APPURL . "/");
