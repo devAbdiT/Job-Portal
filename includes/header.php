@@ -67,7 +67,9 @@ if (!defined('APPURL')) {
 
 
                             <?php if (isset($_SESSION['username'])): ?>
-
+                                <li class="d-lg-inline">
+                                    <a href="post-job.html"><span class="mr-2">+</span> Post a Job</a>
+                                </li>
 
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -75,15 +77,13 @@ if (!defined('APPURL')) {
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                         <a class="dropdown-item" href="<?php echo APPURL ?>users/public-profile.php?id=<?php echo $_SESSION['id']; ?>">Public profile</a>
-                                        <a class="dropdown-item" href="#">Update profile</a>
+                                        <a class="dropdown-item" href="<?php echo APPURL ?>users/update-profile.php?upd_id=<?php echo $_SESSION['id']; ?>">Update profile</a>
                                         <div class="dropdown-divider"></div>
                                         <a class="dropdown-item" href="<?php echo APPURL ?>/auth/logout.php">Logout</a>
                                     </div>
                                 </li>
 
-                                <li class="d-lg-inline">
-                                    <a href="post-job.html"><span class="mr-2">+</span> Post a Job</a>
-                                </li>
+
                             <?php else: ?>
 
                                 <li class="d-lg-inline"><a href="<?php echo APPURL; ?>/auth/login.php">Log In</a></li>
