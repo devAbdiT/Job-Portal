@@ -27,15 +27,27 @@ if (isset($_POST['submit'])) {
       if (strlen($email) > 25 or strlen($username) > 10) {
         echo "<script>alert('Email or Username is too long')</script>";
       } else {
-        $insert = $conn->prepare("INSERT INTO users(username,email,mypassword,img,type) VALUES (:username,:email,:mypassword,:img,:type)");
-        $insert->execute([
-          ':username' => $username,
+
+        //checking for usernam or pass availability
+        $validate = $conn->prepare("SELECT * FROM users WHERE email = :email OR username=:username");
+        // Then execute with parameter
+        $validate->execute([
           ':email' => $email,
-          ':mypassword' => password_hash($password, PASSWORD_DEFAULT),
-          ':img' => $img,
-          ':type' => $type,
+          ':username' => $username
         ]);
-        header("location:login.php");
+        if ($validate->rowCount() > 0) {
+          echo "<script>alert('Email is already taken')</script>";
+        } else {
+          $insert = $conn->prepare("INSERT INTO users(username,email,mypassword,img,type) VALUES (:username,:email,:mypassword,:img,:type)");
+          $insert->execute([
+            ':username' => $username,
+            ':email' => $email,
+            ':mypassword' => password_hash($password, PASSWORD_DEFAULT),
+            ':img' => $img,
+            ':type' => $type,
+          ]);
+          header("location:login.php");
+        }
       }
     } else {
       echo "<script>alert('password donot match')</script>";

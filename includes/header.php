@@ -2,7 +2,7 @@
 // session_start();
 // define("APPURL", "http://localhost:3000/jobboard");
 if (!defined('APPURL')) {
-    define("APPURL", "http://localhost:3000/jobboard");
+    define("APPURL", "http://localhost:3000/jobboard/");
 }
 ?>
 <!DOCTYPE html>
@@ -55,13 +55,14 @@ if (!defined('APPURL')) {
         <header class="site-navbar mt-3">
             <div class="container-fluid">
                 <div class="row align-items-center">
-                    <div class="site-logo col-6"><a href="index.html">JobBoard</a></div>
+                    <div class="site-logo col-6"><a href="<?php echo APPURL; ?>">JobBoard</a></div>
 
                     <nav class="mx-auto site-navigation">
                         <ul style="margin-right: -500px" class="site-menu js-clone-nav d-inline d-xl-block ml-0 pl-0">
-                            <li><a href="index.html" class="nav-link active">Home</a></li>
-                            <li><a href="about.html">About</a></li>
-                            <li><a href="contact.html">Contact</a></li>
+                            <li><a href="<?php echo APPURL; ?>" class="nav-link active">Home</a></li>
+                            <li><a href=" <?php echo APPURL; ?>about.php">About</a></li>
+                            <li><a href="<?php echo APPURL; ?>contact.php
+                            ">Contact</a></li>
 
 
 

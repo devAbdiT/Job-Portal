@@ -3,7 +3,7 @@ session_start();
 require "../config/config.php";
 
 if (!defined('APPURL')) {
-    define("APPURL", "http://localhost:3000/jobboard");
+    define("APPURL", "http://localhost:3000/jobboard/");
 }
 
 if (isset($_SESSION['username'])) {
