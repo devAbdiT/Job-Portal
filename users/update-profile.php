@@ -24,7 +24,9 @@ if (isset($_GET['upd_id'])) {
             $twitter = $_POST['twitter'];
             $linkedin = $_POST['linkedin'];
             $img = $_FILES['img']['name'];
-            $cv = $_FILES['cv']['name'];
+
+            $row->type == "Worker" ? $cv = $_FILES['cv']['name'] : $cv = "NULL";
+
             $dir_img = 'user-images/' . basename($img);
             $dir_cv = 'user-cvs/' . basename($cv);
 
@@ -46,6 +48,7 @@ if (isset($_GET['upd_id'])) {
                     ':cv' => $cv,
                     ':id' => $id
                 ]);
+                header("Location:" . APPURL . "");
             } else {
                 $update->execute([
                     ':username' =>  $username,
@@ -59,9 +62,10 @@ if (isset($_GET['upd_id'])) {
                     ':cv' => $row->cv,
                     ':id' => $id
                 ]);
+                header("Location:" . APPURL . "");
             }
             if (move_uploaded_file($_FILES['img']['tmp_name'], $dir_img) and move_uploaded_file($_FILES['cv']['tmp_name'], $dir_cv)) {
-                echo "done";
+                header("Location:" . APPURL . "");
             }
         }
     }
@@ -114,6 +118,13 @@ require "../includes/header.php";
                                 <input type="text" id="" value="<?php echo $row->title; ?>" name="title" class="form-control">
                             </div>
                         </div>
+                    <?php else: ?>
+                        <div class="row form-group">
+
+                            <div class="col-md-12">
+                                <input type="hidden" id="" value="NULL" name="title" class="form-control">
+                            </div>
+                        </div>
                     <?php endif; ?>
 
                     <div class="row form-group">
@@ -158,6 +169,13 @@ require "../includes/header.php";
                             <div class="col-md-12">
                                 <label class="text-black" for="subject">CV</label>
                                 <input type="file" id="" name="cv" class="form-control">
+                            </div>
+                        </div>
+                    <?php else: ?>
+                        <div class="row form-group">
+
+                            <div class="col-md-12">
+                                <input type="hidden" value="NULL" id="" name="cv" class="form-control">
                             </div>
                         </div>
                     <?php endif; ?>

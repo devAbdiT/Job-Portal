@@ -12,3 +12,6 @@ try {
 }
 //  
 // define("APPURL", "http://localhost:3000/jobboard");
+if (!defined('APPURL')) {
+    define("APPURL", "http://localhost:3000/jobboard/");
+}
