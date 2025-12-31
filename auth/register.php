@@ -23,15 +23,20 @@ if (isset($_POST['submit'])) {
     $type = $_POST['type'];
     //checking for password
     if ($password == $repassword) {
-      $insert = $conn->prepare("INSERT INTO users(username,email,mypassword,img,type) VALUES (:username,:email,:mypassword,:img,:type)");
-      $insert->execute([
-        ':username' => $username,
-        ':email' => $email,
-        ':mypassword' => password_hash($password, PASSWORD_DEFAULT),
-        ':img' => $img,
-        ':type' => $type,
-      ]);
-      header("location:login.php");
+
+      if (strlen($email) > 25 or strlen($username) > 10) {
+        echo "<script>alert('Email or Username is too long')</script>";
+      } else {
+        $insert = $conn->prepare("INSERT INTO users(username,email,mypassword,img,type) VALUES (:username,:email,:mypassword,:img,:type)");
+        $insert->execute([
+          ':username' => $username,
+          ':email' => $email,
+          ':mypassword' => password_hash($password, PASSWORD_DEFAULT),
+          ':img' => $img,
+          ':type' => $type,
+        ]);
+        header("location:login.php");
+      }
     } else {
       echo "<script>alert('password donot match')</script>";
     }
@@ -79,18 +84,18 @@ require "../includes/header.php"
             <div class="col-md-12 mb-3 mb-md-0">
               <label class="text-black" for="fname">Email</label>
               <input
-                type="text"
+                type="email"
                 id="fname"
                 class="form-control"
                 placeholder="Email address"
                 name="email" />
             </div>
           </div>
-          <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
-            <select name="type" class="selectpicker" data-style="btn-white btn-lg" data-width="100%" data-live-search="true" title="Select User Type">
+          <div class="form-group">
+            <label for="job-type">User Type</label>
+            <select name="type" class="selectpicker border rounded" id="user-type" data-style="btn-black" data-width="100%" data-live-search="true" title="Select User Type">
               <option>Worker</option>
               <option>Company</option>
-
             </select>
           </div>
           <div class="row form-group">
