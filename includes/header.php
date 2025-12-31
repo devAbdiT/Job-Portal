@@ -74,8 +74,8 @@ if (!defined('APPURL')) {
                                         <?php echo $_SESSION['username']; ?>
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="#">Action</a>
-                                        <a class="dropdown-item" href="#">Another action</a>
+                                        <a class="dropdown-item" href="<?php echo APPURL ?>users/public-profile.php?id=<?php echo $_SESSION['id']; ?>">Public profile</a>
+                                        <a class="dropdown-item" href="#">Update profile</a>
                                         <div class="dropdown-divider"></div>
                                         <a class="dropdown-item" href="<?php echo APPURL ?>/auth/logout.php">Logout</a>
                                     </div>
