@@ -30,18 +30,36 @@ if (isset($_GET['upd_id'])) {
 
             $update = $conn->prepare("UPDATE users SET username=:username,email=:email,title=:title, bio=:bio, facebook=:facebook,twitter=:twitter, linkedin=:linkedin,img=:img,cv=:cv  WHERE id=:id");
 
-            $update->execute([
-                ':username' =>  $username,
-                ':email' => $email,
-                ':title' => $title,
-                ':bio' => $bio,
-                ':facebook' => $facebook,
-                ':twitter' => $twitter,
-                ':linkedin' => $linkedin,
-                ':img' => $img,
-                ':cv' => $cv,
-                ':id' => $id
-            ]);
+            if ($img !== '' and $cv !== '') {
+                unlink("user-images/" . $row->img . "");
+                unlink("user-cvs/" . $row->cv . "");
+
+                $update->execute([
+                    ':username' =>  $username,
+                    ':email' => $email,
+                    ':title' => $title,
+                    ':bio' => $bio,
+                    ':facebook' => $facebook,
+                    ':twitter' => $twitter,
+                    ':linkedin' => $linkedin,
+                    ':img' => $img,
+                    ':cv' => $cv,
+                    ':id' => $id
+                ]);
+            } else {
+                $update->execute([
+                    ':username' =>  $username,
+                    ':email' => $email,
+                    ':title' => $title,
+                    ':bio' => $bio,
+                    ':facebook' => $facebook,
+                    ':twitter' => $twitter,
+                    ':linkedin' => $linkedin,
+                    ':img' => $row->img,
+                    ':cv' => $row->cv,
+                    ':id' => $id
+                ]);
+            }
             if (move_uploaded_file($_FILES['img']['tmp_name'], $dir_img) and move_uploaded_file($_FILES['cv']['tmp_name'], $dir_cv)) {
                 echo "done";
             }
@@ -145,7 +163,7 @@ require "../includes/header.php";
                     <?php endif; ?>
                     <div class="row form-group">
                         <div class="col-md-12">
-                            <input type="submit" name="submit" value="Send Message" class="btn btn-primary btn-md text-white">
+                            <input type="submit" name="submit" value="Update" class="btn btn-primary btn-md text-white">
                         </div>
                     </div>
 
