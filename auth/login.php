@@ -7,7 +7,7 @@ if (!defined('APPURL')) {
 }
 
 if (isset($_SESSION['username'])) {
-    header("location:" . APPURL . "/");
+    header("location:" . APPURL . "");
 }
 if (isset($_POST['submit'])) {
     if (empty($_POST['email']) or empty($_POST['password'])) {

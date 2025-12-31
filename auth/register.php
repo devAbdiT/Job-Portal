@@ -7,7 +7,7 @@ if (!defined('APPURL')) {
   define("APPURL", "http://localhost:3000/jobboard");
 }
 
-
+//login ketederege behoala endegena register bineka 
 if (isset($_SESSION['username'])) {
   header("location:" . APPURL . "/");
 }

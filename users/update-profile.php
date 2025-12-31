@@ -1,10 +1,21 @@
 <?php
 session_start();
 require "../config/config.php";
+?>
+<?php
+//if session not set  go to home page
+if (!isset($_SESSION['username'])) {
+    header("location:" . APPURL . "");
+}
+
 
 
 if (isset($_GET['upd_id'])) {
     $id = $_GET['upd_id'];
+    // Prevent accessing other users' profiles
+    if ((int)$_SESSION['id'] !== (int)$id) {
+        header("location:" . APPURL . "");
+    }
 
     $select = $conn->prepare("SELECT *FROM users WHERE id=:id");
     $select->execute([':id' => $id]);
