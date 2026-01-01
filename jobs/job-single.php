@@ -2,6 +2,7 @@
 require "../config/config.php";
 
 if (isset($_GET['id'])) {
+  //The job table primary id
   $id = $_GET['id'];
   $select = $conn->prepare("SELECT * FROM jobs WHERE id=:id");
   $select->execute([':id' => $id]);
