@@ -59,6 +59,26 @@ if (isset($_POST['submit_application'])) {
 
   //header("location:" . APPURL . "jobs/job-single.php?id=" . $id . "");
 }
+//Saving Job
+if (isset($_POST['submit_save'])) {
+  $worker_id = $_POST['worker_id'];
+  $job_id = $_POST['job_id'];
+
+  $saved_jobs = $conn->prepare("INSERT INTO saved_jobs (
+            job_id, 
+            worker_id
+        ) VALUES (
+            :job_id, 
+            :worker_id 
+            
+        )");
+
+  $saved_jobs->execute([
+    ':worker_id' => $worker_id,
+    ':job_id' => $job_id
+  ]);
+  echo "<script> alert('Application saved successfully');</script>";
+}
 ?>
 
 <?php
@@ -136,11 +156,21 @@ require "../includes/header.php";
           <?php if (isset($_SESSION['username'])): ?>
             <?php if (isset($_SESSION['type']) and $_SESSION['type'] == "Worker"): ?>
               <div class="row mb-5">
-                <div class="col-6">
-                  <button class="btn btn-block btn-light btn-md"><i class="icon-heart"></i>Save Job</button>
-                  <!--add text-danger to it to make it read-->
-                </div>
-                <form class="p-4 p-md-5 border rounded" action="job-single.php?id=<?php echo $id; ?>" method="POST">
+                <form action="job-single.php?id=<?php echo $id; ?>" method="POST">
+
+                  <!--job details-->
+
+                  <div class="form-group">
+                    <input type="text" name="job_id" value="<?php echo $id; ?>" class="form-control" id="" placeholder="job_id">
+                  </div>
+                  <div class="form-group">
+                    <input type="text" name="worker_id" value="<?php echo $_SESSION['id']; ?>" class="form-control" id="" placeholder="worker_id">
+                  </div>
+                  <div class="col-6">
+                    <button name="submit_save" type="submit" class="btn btn-block btn-light btn-md"><i class="icon-heart"></i>Save Job</button>
+                  </div>
+                </form>
+                <form action="job-single.php?id=<?php echo $id; ?>" method="POST">
 
                   <!--job details-->
 
@@ -166,7 +196,7 @@ require "../includes/header.php";
                     <input type="hidden" name="company_id" value="<?php echo $row->company_id; ?>" class="form-control" id="" placeholder="company_id">
                   </div>
                   <div class="col-6">
-                    <button name="submit_application" type="submit" class="btn btn-block btn-primary btn-md">Apply Now</button>
+                    <button style="padding: 13px 157px; margin-top:-17px;" name="submit_application" type="submit" class="btn btn-inline btn-primary btn-md">Apply</button>
                   </div>
                 </form>
 
