@@ -12,12 +12,17 @@ if (isset($_SESSION['type']) and $_SESSION['type'] !== "Company") {
 }
 
 
+$get_categories = $conn->prepare("SELECT * FROM categories");
+$get_categories->execute();
+
+$get_category = $get_categories->fetchALL(PDO::FETCH_OBJ);
+
 if (isset($_POST['submit'])) {
 
     if (
         empty($_POST['job_title']) or empty($_POST['job_region']) or empty($_POST['job_type']) or empty($_POST['vacancy']) or empty($_POST['experience'])
         or empty($_POST['salary']) or empty($_POST['gender']) or empty($_POST['application_deadline']) or empty($_POST['job_description']) or empty($_POST['responsibilities'])
-        or empty($_POST['education_experience']) or empty($_POST['other_benifits']) or empty($_POST['company_email']) or empty($_POST['company_name']) or empty($_POST['company_id']) or empty($_POST['company_image'])
+        or empty($_POST['education_experience']) or empty($_POST['other_benifits']) or empty($_POST['company_email']) or empty($_POST['company_name']) or empty($_POST['company_id']) or empty($_POST['company_image']) or empty($_POST['job_category'])
     ) {
         echo "<script>alert('one or more inputs are empty')</script>";
     } else {
@@ -26,6 +31,7 @@ if (isset($_POST['submit'])) {
         $job_region = $_POST['job_region'];
         $job_type = $_POST['job_type'];
         $vacancy = $_POST['vacancy'];
+        $job_category = $_POST['job_category'];
         $experience = $_POST['experience'];
         $salary = $_POST['salary'];
         $gender = $_POST['gender'];
@@ -40,9 +46,9 @@ if (isset($_POST['submit'])) {
         $company_image = $_POST['company_image'];
 
 
-        $insert = $conn->prepare("INSERT INTO jobs (job_title, job_region, job_type, vacancy, experience, salary, gender, application_deadline,
+        $insert = $conn->prepare("INSERT INTO jobs (job_title, job_region, job_type, vacancy, job_category, experience, salary, gender, application_deadline,
          job_description, responsibilities, education_experience, other_benifits, company_email, company_name, company_id, company_image) VALUES(
-          :job_title, :job_region, :job_type, :vacancy, :experience, :salary, :gender, :application_deadline,
+          :job_title, :job_region, :job_type, :vacancy, :job_category, :experience, :salary, :gender, :application_deadline,
           :job_description, :responsibilities, :education_experience, :other_benifits,  :company_email, :company_name, :company_id, :company_image
          )");
 
@@ -52,6 +58,7 @@ if (isset($_POST['submit'])) {
             ':job_region' => $job_region,
             ':job_type' => $job_type,
             ':vacancy' => $vacancy,
+            ':job_category' => $job_category,
             ':experience' => $experience,
             ':salary' => $salary,
             ':gender' => $gender,
@@ -143,6 +150,14 @@ if (isset($_POST['submit'])) {
                     <div class="form-group">
                         <label for="job-location">Vacancy</label>
                         <input name="vacancy" type="text" class="form-control" id="job-location" placeholder="e.g. 3">
+                    </div>
+                    <div class="form-group">
+                        <label for="job-type">Job Category</label>
+                        <select name="job_category" class="selectpicker border rounded" id="job-type" data-style="btn-black" data-width="100%" data-live-search="true" title="Select Job Category">
+                            <?php foreach ($get_category as $category) : ?>
+                                <option><?php echo $category->name ?></option>
+                            <?php endforeach; ?>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="job-type">Experience</label>
