@@ -14,16 +14,50 @@ if (isset($_GET['id'])) {
   $row = $select->fetch(PDO::FETCH_OBJ);
   //echo $row->job_category;
 
+  //Getting related jobs
   $related_jobs = $conn->prepare("SELECT * FROM jobs WHERE job_category=:job_category AND status=:status AND id!=:id");
   $related_jobs->execute([':job_category' => $row->job_category, ':status' => 1, ':id' => $id]);
 
   $related_job = $related_jobs->fetchALL(PDO::FETCH_OBJ);
 
-
+  //getting the count of related jobs
   $job_count = $conn->prepare("SELECT COUNT(*) as job_count FROM jobs WHERE job_category=:job_category AND status=:status AND id!=:id");
   $job_count->execute([':job_category' => $row->job_category, ':status' => 1, ':id' => $id]);
 
   $job_num = $job_count->fetch(PDO::FETCH_OBJ);
+  //Submiting Job Applictaion
+
+}
+if (isset($_POST['submit_application'])) {
+  $username = $_POST['username'];
+  $email = $_POST['email'];
+  $cv = $_POST['cv'];
+  $worker_id = $_POST['worker_id'];
+  $job_id = $_POST['job_id'];
+  $job_title = $_POST['job_title'];
+  $company_id = $_POST['company_id'];
+
+
+  $insert = $conn->prepare("INSERT INTO job_applications (
+        username, email, cv, worker_id, job_id, 
+        job_title, company_id
+    ) VALUES (
+        :username, :email, :cv, :worker_id, :job_id, 
+        :job_title, :company_id
+    )");
+
+  $insert->execute([
+    ':username' => $username,
+    ':email' => $email,
+    ':cv' => $cv,
+    ':worker_id' => $worker_id,
+    ':job_id' => $job_id,
+    ':job_title' => $job_title,
+    ':company_id' => $company_id
+  ]);
+  echo "</script> alert('Application sent successfully');</script>";
+
+  //header("location:" . APPURL . "jobs/job-single.php?id=" . $id . "");
 }
 ?>
 
@@ -106,35 +140,36 @@ require "../includes/header.php";
                   <button class="btn btn-block btn-light btn-md"><i class="icon-heart"></i>Save Job</button>
                   <!--add text-danger to it to make it read-->
                 </div>
-                <form class="p-4 p-md-5 border rounded" action="post-job.php" method="POST">
+                <form class="p-4 p-md-5 border rounded" action="job-single.php?id=<?php echo $id; ?>" method="POST">
 
                   <!--job details-->
 
                   <div class="form-group">
-                    <input type="text" name="username" value="<?php echo $_SESSION['username']; ?>" class="form-control" id="" placeholder="Username">
+                    <input type="hidden" name="username" value="<?php echo $_SESSION['username']; ?>" class="form-control" id="" placeholder="Username">
                   </div>
                   <div class="form-group">
-                    <input type="text" name="email" value="<?php echo $_SESSION['email']; ?>" class="form-control" id="" placeholder="email">
+                    <input type="hidden" name="email" value="<?php echo $_SESSION['email']; ?>" class="form-control" id="" placeholder="email">
                   </div>
                   <div class="form-group">
-                    <input type="text" name="cv" value="<?php echo $_SESSION['cv']; ?>" class="form-control" id="" placeholder="cv">
+                    <input type="hidden" name="cv" value="<?php echo $_SESSION['cv']; ?>" class="form-control" id="" placeholder="cv">
                   </div>
                   <div class="form-group">
-                    <input type="text" name="worker_id" value="<?php echo $_SESSION['id']; ?>" class="form-control" id="" placeholder="">
+                    <input type="hidden" name="worker_id" value="<?php echo $_SESSION['id']; ?>" class="form-control" id="" placeholder="">
                   </div>
                   <div class="form-group">
-                    <input type="text" name="job_id" value="<?php echo $id; ?>" class="form-control" id="" placeholder="job_id">
+                    <input type="hidden" name="job_id" value="<?php echo $id; ?>" class="form-control" id="" placeholder="job_id">
                   </div>
                   <div class="form-group">
-                    <input type="text" name="job_title" value="<?php echo $row->job_title; ?>" class="form-control" id="" placeholder="job_title">
+                    <input type="hidden" name="job_title" value="<?php echo $row->job_title; ?>" class="form-control" id="" placeholder="job_title">
                   </div>
                   <div class="form-group">
-                    <input type="text" name="company_id" value="<?php echo $row->company_id; ?>" class="form-control" id="" placeholder="company_id">
+                    <input type="hidden" name="company_id" value="<?php echo $row->company_id; ?>" class="form-control" id="" placeholder="company_id">
+                  </div>
+                  <div class="col-6">
+                    <button name="submit_application" type="submit" class="btn btn-block btn-primary btn-md">Apply Now</button>
                   </div>
                 </form>
-                <div class="col-6">
-                  <button class="btn btn-block btn-primary btn-md">Apply Now</button>
-                </div>
+
               </div>
             <?php endif; ?>
 
