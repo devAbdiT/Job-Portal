@@ -104,6 +104,16 @@ require "../includes/header.php";
             </div>
           </div>
 
+          <div class="row mb-5">
+            <div class="col-6">
+              <a href="<?php echo APPURL ?>jobs/job-update.php?id=<?php echo $row->id; ?>" class="btn btn-block btn-light btn-md">Update</a>
+              <!--add text-danger to it to make it read-->
+            </div>
+            <div class="col-6">
+              <a href="<?php echo APPURL ?>jobs/job-delete.php?id=<?php echo $row->id; ?>" class="btn btn-block btn-danger btn-md">Delete</a>
+            </div>
+          </div>
+
         </div>
         <div class="col-lg-4">
           <div class="bg-light p-3 border rounded mb-4">
@@ -161,7 +171,11 @@ require "../includes/header.php";
               <span class="icon-room"></span><?php echo $job->job_region; ?>
             </div>
             <div class="job-listing-meta">
-              <span class="badge badge-danger"><?php echo $job->job_type; ?></span>
+              <span class="badge badge-<?php if ($job->job_type == 'Part Time') {
+                                          echo 'danger';
+                                        } else {
+                                          echo 'success';
+                                        }  ?>"><?php echo $job->job_type; ?></span>
             </div>
           </div>
 
