@@ -37,6 +37,8 @@ if (isset($_POST['submit'])) {
                 $_SESSION['type'] = $select['type'];
                 $_SESSION['email'] = $select['email'];
                 $_SESSION['image'] = $select['img'];
+                //Added after (during Applying for job Part)
+                $_SESSION['cv'] = $select['cv'];
 
 
                 header("Location: " . APPURL . "/");

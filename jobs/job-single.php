@@ -106,6 +106,32 @@ require "../includes/header.php";
                   <button class="btn btn-block btn-light btn-md"><i class="icon-heart"></i>Save Job</button>
                   <!--add text-danger to it to make it read-->
                 </div>
+                <form class="p-4 p-md-5 border rounded" action="post-job.php" method="POST">
+
+                  <!--job details-->
+
+                  <div class="form-group">
+                    <input type="text" name="username" value="<?php echo $_SESSION['username']; ?>" class="form-control" id="" placeholder="Username">
+                  </div>
+                  <div class="form-group">
+                    <input type="text" name="email" value="<?php echo $_SESSION['email']; ?>" class="form-control" id="" placeholder="email">
+                  </div>
+                  <div class="form-group">
+                    <input type="text" name="cv" value="<?php echo $_SESSION['cv']; ?>" class="form-control" id="" placeholder="cv">
+                  </div>
+                  <div class="form-group">
+                    <input type="text" name="worker_id" value="<?php echo $_SESSION['id']; ?>" class="form-control" id="" placeholder="">
+                  </div>
+                  <div class="form-group">
+                    <input type="text" name="job_id" value="<?php echo $id; ?>" class="form-control" id="" placeholder="job_id">
+                  </div>
+                  <div class="form-group">
+                    <input type="text" name="job_title" value="<?php echo $row->job_title; ?>" class="form-control" id="" placeholder="job_title">
+                  </div>
+                  <div class="form-group">
+                    <input type="text" name="company_id" value="<?php echo $row->company_id; ?>" class="form-control" id="" placeholder="company_id">
+                  </div>
+                </form>
                 <div class="col-6">
                   <button class="btn btn-block btn-primary btn-md">Apply Now</button>
                 </div>
