@@ -98,7 +98,7 @@ require "../includes/header.php";
                     <a href="<?php echo APPURL; ?>jobs/job-single.php?id=<?php echo $oneJob->id; ?>"></a>
                     <div class="job-listing-logo">
                         <img
-                            src="../user-images/<?php echo $_SESSION['image']; ?>"
+                            src="./user-images/<?php echo $_SESSION['image']; ?>"
                             alt="Free Website Template by Free-Template.co"
                             class="img-fluid" />
                     </div>
@@ -115,7 +115,11 @@ require "../includes/header.php";
                             <span class="icon-room"></span> <?php echo $oneJob->job_title; ?>
                         </div>
                         <div class="job-listing-meta">
-                            <span class="badge badge-danger"><?php echo $oneJob->job_type; ?></span>
+                            <span class="badge badge-<?php if ($oneJob->job_type == 'Part-Time') {
+                                                            echo 'danger';
+                                                        } else {
+                                                            echo 'success';
+                                                        }  ?>"><?php echo $oneJob->job_type; ?></span>
                         </div>
                     </div>
                 </li>
