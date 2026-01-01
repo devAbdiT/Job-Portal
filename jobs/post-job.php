@@ -2,6 +2,16 @@
 
 <?php
 
+
+// if (!isset($_SESSION['username'])) {
+//     header("location:" . APPURL . "");
+// }
+// To not access from Worker account
+if (isset($_SESSION['type']) and $_SESSION['type'] !== "Company") {
+    header("location:" . APPURL . "");
+}
+
+
 if (isset($_POST['submit'])) {
 
     if (
@@ -73,7 +83,7 @@ if (isset($_POST['submit'])) {
             <div class="col-md-7">
                 <h1 class="text-white font-weight-bold">Post A Job</h1>
                 <div class="custom-breadcrumbs">
-                    <a href="#">Home</a> <span class="mx-2 slash">/</span>
+                    <a href="<?php echo APPURL; ?>">Home</a> <span class="mx-2 slash">/</span>
                     <a href="#">Job</a> <span class="mx-2 slash">/</span>
                     <span class="text-white"><strong>Post a Job</strong></span>
                 </div>

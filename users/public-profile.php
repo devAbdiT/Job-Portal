@@ -11,6 +11,12 @@ if (isset($_GET['id'])) {
     $select = $conn->prepare("SELECT * FROM users WHERE id=:id");
     $select->execute([':id' => $id]);
     $profile = $select->fetch(PDO::FETCH_OBJ);
+
+    // Jobs Created By this Company
+
+    $jobs = $conn->prepare("SELECT * FROM jobs WHERE company_id=:company_id AND status=:status");
+    $jobs->execute(['company_id' => $id, ':status' => 1]);
+    $moreJobs = $jobs->fetchALL(PDO::FETCH_OBJ);
 } else {
     echo "404";
 }
@@ -76,6 +82,48 @@ require "../includes/header.php";
     </div>
 </section>
 
-<?php
-require "../includes/footer.php";
-?>
+<section class="site-section">
+    <div class="container">
+        <div class="row mb-5 justify-content-center">
+            <div class="col-md-7 text-center">
+                <h2 class="section-title mb-2">Jobs Posted by this Company</h2>
+            </div>
+        </div>
+
+        <ul class="job-listings mb-5">
+
+            <?php foreach ($moreJobs as $oneJob): ?>
+                <li
+                    class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
+                    <a href="<?php echo APPURL; ?>jobs/job-single.php?id=<?php echo $oneJob->id; ?>"></a>
+                    <div class="job-listing-logo">
+                        <img
+                            src="../user-images/<?php echo $_SESSION['image']; ?>"
+                            alt="Free Website Template by Free-Template.co"
+                            class="img-fluid" />
+                    </div>
+
+                    <div
+                        class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4">
+                        <div
+                            class="job-listing-position custom-width w-50 mb-3 mb-sm-0">
+                            <h2><?php echo $oneJob->job_title; ?></h2>
+                            <strong><?php echo $_SESSION['username'] ?></strong>
+                        </div>
+                        <div
+                            class="job-listing-location mb-3 mb-sm-0 custom-width w-25">
+                            <span class="icon-room"></span> <?php echo $oneJob->job_title; ?>
+                        </div>
+                        <div class="job-listing-meta">
+                            <span class="badge badge-danger"><?php echo $oneJob->job_type; ?></span>
+                        </div>
+                    </div>
+                </li>
+                <br>
+            <?php endforeach; ?>
+
+        </ul>
+    </div>
+    <?php
+    require "../includes/footer.php";
+    ?>

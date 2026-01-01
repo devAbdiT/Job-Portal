@@ -67,10 +67,11 @@ if (!defined('APPURL')) {
 
 
                             <?php if (isset($_SESSION['username'])): ?>
-                                <li class="d-lg-inline">
-                                    <a href="<?php echo APPURL; ?>jobs/post-job.php"><span class="mr-2">+</span> Post a Job</a>
-                                </li>
-
+                                <?php if (isset($_SESSION['type']) and $_SESSION['type'] == "Company") : ?>
+                                    <li class="d-lg-inline">
+                                        <a href="<?php echo APPURL; ?>jobs/post-job.php"><span class="mr-2">+</span> Post a Job</a>
+                                    </li>
+                                <?php endif; ?>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <?php echo $_SESSION['username']; ?>
