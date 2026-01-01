@@ -79,6 +79,17 @@ if (isset($_POST['submit_save'])) {
   ]);
   echo "<script> alert('Application saved successfully');</script>";
 }
+
+//checking for worker application
+$checking_for_application = $conn->prepare("SELECT *FROM job_applications WHERE worker_id=:worker_id AND job_id=:job_id");
+$checking_for_application->execute(
+  [
+    ':worker_id' => $_SESSION['id'],
+    ':job_id' => $id
+  ]
+);
+
+echo $checking_for_application->rowCount();
 ?>
 
 <?php
@@ -170,36 +181,43 @@ require "../includes/header.php";
                     <button name="submit_save" type="submit" class="btn btn-block btn-light btn-md"><i class="icon-heart"></i>Save Job</button>
                   </div>
                 </form>
-                <form action="job-single.php?id=<?php echo $id; ?>" method="POST">
 
-                  <!--job details-->
+                <!-- checking if it already applied to the job before-->
+                <?php if ($checking_for_application->rowCount() == 0): ?>
+                  <form action="job-single.php?id=<?php echo $id; ?>" method="POST">
 
-                  <div class="form-group">
-                    <input type="hidden" name="username" value="<?php echo $_SESSION['username']; ?>" class="form-control" id="" placeholder="Username">
-                  </div>
-                  <div class="form-group">
-                    <input type="hidden" name="email" value="<?php echo $_SESSION['email']; ?>" class="form-control" id="" placeholder="email">
-                  </div>
-                  <div class="form-group">
-                    <input type="hidden" name="cv" value="<?php echo $_SESSION['cv']; ?>" class="form-control" id="" placeholder="cv">
-                  </div>
-                  <div class="form-group">
-                    <input type="hidden" name="worker_id" value="<?php echo $_SESSION['id']; ?>" class="form-control" id="" placeholder="">
-                  </div>
-                  <div class="form-group">
-                    <input type="hidden" name="job_id" value="<?php echo $id; ?>" class="form-control" id="" placeholder="job_id">
-                  </div>
-                  <div class="form-group">
-                    <input type="hidden" name="job_title" value="<?php echo $row->job_title; ?>" class="form-control" id="" placeholder="job_title">
-                  </div>
-                  <div class="form-group">
-                    <input type="hidden" name="company_id" value="<?php echo $row->company_id; ?>" class="form-control" id="" placeholder="company_id">
-                  </div>
+                    <!--job details-->
+
+                    <div class="form-group">
+                      <input type="hidden" name="username" value="<?php echo $_SESSION['username']; ?>" class="form-control" id="" placeholder="Username">
+                    </div>
+                    <div class="form-group">
+                      <input type="hidden" name="email" value="<?php echo $_SESSION['email']; ?>" class="form-control" id="" placeholder="email">
+                    </div>
+                    <div class="form-group">
+                      <input type="hidden" name="cv" value="<?php echo $_SESSION['cv']; ?>" class="form-control" id="" placeholder="cv">
+                    </div>
+                    <div class="form-group">
+                      <input type="hidden" name="worker_id" value="<?php echo $_SESSION['id']; ?>" class="form-control" id="" placeholder="">
+                    </div>
+                    <div class="form-group">
+                      <input type="hidden" name="job_id" value="<?php echo $id; ?>" class="form-control" id="" placeholder="job_id">
+                    </div>
+                    <div class="form-group">
+                      <input type="hidden" name="job_title" value="<?php echo $row->job_title; ?>" class="form-control" id="" placeholder="job_title">
+                    </div>
+                    <div class="form-group">
+                      <input type="hidden" name="company_id" value="<?php echo $row->company_id; ?>" class="form-control" id="" placeholder="company_id">
+                    </div>
+                    <div class="col-6">
+                      <button style="padding: 13px 157px; margin-top:-17px;" name="submit_application" type="submit" class="btn btn-inline btn-primary btn-md">Apply</button>
+                    </div>
+                  </form>
+                <?php else: ?>
                   <div class="col-6">
-                    <button style="padding: 13px 157px; margin-top:-17px;" name="submit_application" type="submit" class="btn btn-inline btn-primary btn-md">Apply</button>
+                    <h3 style="padding: 13px 157px; margin-top:-17px;" class="btn btn-inline ">You Applied for this job</h3>
                   </div>
-                </form>
-
+                <?php endif; ?>
               </div>
             <?php endif; ?>
 
