@@ -104,16 +104,21 @@ require "../includes/header.php";
             </div>
           </div>
 
-          <div class="row mb-5">
-            <div class="col-6">
-              <a href="<?php echo APPURL ?>jobs/job-update.php?id=<?php echo $row->id; ?>" class="btn btn-block btn-light btn-md">Update</a>
-              <!--add text-danger to it to make it read-->
-            </div>
-            <div class="col-6">
-              <a href="<?php echo APPURL ?>jobs/job-delete.php?id=<?php echo $row->id; ?>" class="btn btn-block btn-danger btn-md">Delete</a>
-            </div>
-          </div>
-
+          <?php if (isset($_SESSION['username'])): ?>
+            <?php if (isset($_SESSION['type']) and isset($_SESSION['type']) == "Company"): ?>
+              <?php if (isset($_SESSION['id']) and $_SESSION['id'] == $row->company_id): ?>
+                <div class="row mb-5">
+                  <div class="col-6">
+                    <a href="<?php echo APPURL ?>jobs/job-update.php?id=<?php echo $row->id; ?>" class="btn btn-block btn-light btn-md">Update</a>
+                    <!--add text-danger to it to make it read-->
+                  </div>
+                  <div class="col-6">
+                    <a href="<?php echo APPURL ?>jobs/job-delete.php?id=<?php echo $row->id; ?>" class="btn btn-block btn-danger btn-md">Delete</a>
+                  </div>
+                </div>
+              <?php endif; ?>
+            <?php endif; ?>
+          <?php endif; ?>
         </div>
         <div class="col-lg-4">
           <div class="bg-light p-3 border rounded mb-4">

@@ -4,6 +4,9 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 require "../config/config.php";
 
+if (isset($_SESSION['type']) and $_SESSION['type'] !== "Company") {
+    header("location:" . APPURL . "");
+}
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
 
@@ -13,6 +16,8 @@ if (isset($_GET['id'])) {
     echo "<script>alert('Job deleted successfully!')</script>";
 
     header("location:" . APPURL . "");
+} else {
+    echo "404";
 }
 
 ?>
