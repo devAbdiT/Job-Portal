@@ -1,4 +1,8 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+  session_start();
+}
+
 require "../config/config.php";
 
 if (isset($_GET['id'])) {
@@ -95,18 +99,25 @@ require "../includes/header.php";
             </ul>
           </div>
 
-          <div class="row mb-5">
-            <div class="col-6">
-              <button class="btn btn-block btn-light btn-md"><i class="icon-heart"></i>Save Job</button>
-              <!--add text-danger to it to make it read-->
-            </div>
-            <div class="col-6">
-              <button class="btn btn-block btn-primary btn-md">Apply Now</button>
-            </div>
-          </div>
+          <?php if (isset($_SESSION['username'])): ?>
+            <?php if (isset($_SESSION['type']) and $_SESSION['type'] == "Worker"): ?>
+              <div class="row mb-5">
+                <div class="col-6">
+                  <button class="btn btn-block btn-light btn-md"><i class="icon-heart"></i>Save Job</button>
+                  <!--add text-danger to it to make it read-->
+                </div>
+                <div class="col-6">
+                  <button class="btn btn-block btn-primary btn-md">Apply Now</button>
+                </div>
+              </div>
+            <?php endif; ?>
+
+          <?php else: ?>
+            <h2>Login So You Can Apply for this job</h2>
+          <?php endif; ?>
 
           <?php if (isset($_SESSION['username'])): ?>
-            <?php if (isset($_SESSION['type']) and isset($_SESSION['type']) == "Company"): ?>
+            <?php if (isset($_SESSION['type']) and $_SESSION['type'] == "Company"): ?>
               <?php if (isset($_SESSION['id']) and $_SESSION['id'] == $row->company_id): ?>
                 <div class="row mb-5">
                   <div class="col-6">

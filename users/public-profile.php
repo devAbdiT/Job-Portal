@@ -84,12 +84,14 @@ require "../includes/header.php";
 
 <section class="site-section">
     <div class="container">
-        <div class="row mb-5 justify-content-center">
-            <div class="col-md-7 text-center">
-                <h2 class="section-title mb-2">Jobs Posted by this Company</h2>
-            </div>
-        </div>
 
+        <?php if (isset($_SESSION['type']) and $_SESSION['type'] == "Company"): ?>
+            <div class="row mb-5 justify-content-center">
+                <div class="col-md-7 text-center">
+                    <h2 class="section-title mb-2">Jobs Posted by this Company</h2>
+                </div>
+            </div>
+        <?php endif; ?>
         <ul class="job-listings mb-5">
 
             <?php foreach ($moreJobs as $oneJob): ?>
