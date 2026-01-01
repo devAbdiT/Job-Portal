@@ -97,23 +97,24 @@ require "../includes/header.php";
           <div class="bg-light p-3 border rounded mb-4">
             <h3 class="text-primary  mt-3 h5 pl-3 mb-3 ">Job Summary</h3>
             <ul class="list-unstyled pl-3 mb-0">
-              <li class="mb-2"><strong class="text-black">Published on:</strong> <?php echo $row->created_at; ?></li>
+              <li class="mb-2"><strong class="text-black">Published on:</strong> <?php echo date('M', strtotime($row->created_at)) . ',' . date('d', strtotime($row->created_at)) . ',' . date('Y', strtotime($row->created_at)); ?></li>
               <li class="mb-2"><strong class="text-black">Vacancy:</strong> <?php echo $row->vacancy; ?></li>
               <li class="mb-2"><strong class="text-black">Employment Status:</strong> <?php echo $row->job_type; ?></li>
               <li class="mb-2"><strong class="text-black">Experience:</strong> <?php echo $row->experience; ?></li>
               <li class="mb-2"><strong class="text-black">Job Location:</strong> <?php echo $row->job_region; ?></li>
               <li class="mb-2"><strong class="text-black">Salary:</strong><?php echo $row->salary; ?></li>
               <li class="mb-2"><strong class="text-black">Gender:</strong> <?php echo $row->gender; ?></li>
-              <li class="mb-2"><strong class="text-black">Application Deadline:</strong> <?php echo $row->application_deadline; ?></li>
+              <li class="mb-2"><strong class="text-black">Application Deadline:</strong> <?php echo date('M', strtotime($row->application_deadline)) . ',' . date('d', strtotime($row->application_deadline)) . ',' . date('Y', strtotime($row->application_deadline)); ?></li>
             </ul>
           </div>
 
           <div class="bg-light p-3 border rounded">
             <h3 class="text-primary  mt-3 h5 pl-3 mb-3 ">Share</h3>
             <div class="px-3">
-              <a href="#" class="pt-3 pb-3 pr-3 pl-0"><span class="icon-facebook"></span></a>
-              <a href="#" class="pt-3 pb-3 pr-3 pl-0"><span class="icon-twitter"></span></a>
-              <a href="#" class="pt-3 pb-3 pr-3 pl-0"><span class="icon-linkedin"></span></a>
+              <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo APPURL; ?>jobs/job-single.php?id=<?php echo $row->id; ?>&quote=<?php echo $row->job_title; ?>" class="pt-3 pb-3 pr-3 pl-0"><span class="icon-facebook"></span></a>
+
+              <a href="https://X.com/intent/tweet?text=<?php echo $row->job_title; ?>&url=<?php echo APPURL; ?>jobs/job-single.php?id=<?php echo $row->id; ?>" class="pt-3 pb-3 pr-3 pl-0"><span class="icon-twitter"></span></a>
+              <a href="https://www.linkedin.com/sharing/share-offsite/?url=<?php echo APPURL; ?>jobs/job-single.php?id=<?php echo $row->id; ?>" class="pt-3 pb-3 pr-3 pl-0"><span class="icon-linkedin"></span></a>
             </div>
           </div>
 
