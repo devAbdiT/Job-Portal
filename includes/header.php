@@ -79,6 +79,10 @@ if (!defined('APPURL')) {
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                         <a class="dropdown-item" href="<?php echo APPURL ?>users/public-profile.php?id=<?php echo $_SESSION['id']; ?>">Public profile</a>
                                         <a class="dropdown-item" href="<?php echo APPURL ?>users/update-profile.php?upd_id=<?php echo $_SESSION['id']; ?>">Update profile</a>
+                                        <!-- To display for workers only -->
+                                        <?php if (isset($_SESSION['type']) and $_SESSION['type'] == "Worker") : ?>
+                                            <a class="dropdown-item" href="<?php echo APPURL ?>users/saved_jobs.php?id=<?php echo $_SESSION['id']; ?>">Saved jobs</a>
+                                        <?php endif; ?>
                                         <div class="dropdown-divider"></div>
                                         <a class="dropdown-item" href="<?php echo APPURL ?>/auth/logout.php">Logout</a>
                                     </div>

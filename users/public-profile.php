@@ -8,6 +8,10 @@ require "../config/config.php";
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
 
+    // if ((int)$_SESSION['id'] !== (int)$id) {
+    //     header("location:" . APPURL . "");
+    // }
+
     $select = $conn->prepare("SELECT * FROM users WHERE id=:id");
     $select->execute([':id' => $id]);
     $profile = $select->fetch(PDO::FETCH_OBJ);
@@ -132,6 +136,7 @@ require "../includes/header.php";
 
         </ul>
     </div>
-    <?php
-    require "../includes/footer.php";
-    ?>
+</section>
+<?php
+require "../includes/footer.php";
+?>
