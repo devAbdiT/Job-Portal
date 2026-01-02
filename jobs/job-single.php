@@ -55,7 +55,7 @@ if (isset($_POST['submit_application'])) {
     ':job_title' => $job_title,
     ':company_id' => $company_id
   ]);
-  echo "</script> alert('Application sent successfully');</script>";
+  echo "<script> alert('Application sent successfully');</script>";
 
   //header("location:" . APPURL . "jobs/job-single.php?id=" . $id . "");
 }
@@ -167,20 +167,11 @@ require "../includes/header.php";
           <?php if (isset($_SESSION['username'])): ?>
             <?php if (isset($_SESSION['type']) and $_SESSION['type'] == "Worker"): ?>
               <div class="row mb-5">
-                <form action="job-single.php?id=<?php echo $id; ?>" method="POST">
 
-                  <!--job details-->
+                <div class="col-6">
+                  <a href="job-save.php?job_id=<?php echo $id; ?>&worker_id=<?php echo $_SESSION['id'] ?>&status=save" class="btn btn-block btn-light btn-md"><i class="icon-heart"></i> Save Job</a>
+                </div>
 
-                  <div class="form-group">
-                    <input type="text" name="job_id" value="<?php echo $id; ?>" class="form-control" id="" placeholder="job_id">
-                  </div>
-                  <div class="form-group">
-                    <input type="text" name="worker_id" value="<?php echo $_SESSION['id']; ?>" class="form-control" id="" placeholder="worker_id">
-                  </div>
-                  <div class="col-6">
-                    <button name="submit_save" type="submit" class="btn btn-block btn-light btn-md"><i class="icon-heart"></i>Save Job</button>
-                  </div>
-                </form>
 
                 <!-- checking if it already applied to the job before-->
                 <?php if ($checking_for_application->rowCount() == 0): ?>
@@ -215,7 +206,7 @@ require "../includes/header.php";
                   </form>
                 <?php else: ?>
                   <div class="col-6">
-                    <h3 style="padding: 13px 157px; margin-top:-17px;" class="btn btn-inline ">You Applied for this job</h3>
+                    <h3 class="d-inline ">You Applied for this job</h3>
                   </div>
                 <?php endif; ?>
               </div>

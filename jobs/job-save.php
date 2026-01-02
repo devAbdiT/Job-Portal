@@ -1,0 +1,30 @@
+<?php
+
+require "../config/config.php";
+
+if (isset($_GET['job_id']) and isset($_GET['worker_id']) and isset($_GET['status'])) {
+    $job_id = $_GET['job_id'];
+    $worker_id = $_GET['worker_id'];
+    $status = $_GET['status'];
+
+    $insert = $conn->prepare("INSERT INTO saved_jobs (
+            job_id, 
+            worker_id
+        ) VALUES (
+            :job_id, 
+            :worker_id 
+            
+        )");
+
+    $insert->execute([
+        ':worker_id' => $worker_id,
+        ':job_id' => $job_id
+    ]);
+    header("location:" . APPURL . "jobs/job-single.php?id=" . $job_id . "");
+}
+
+?>
+<?php require "../includes/header.php"; ?>
+
+
+<?php require "../includes/footer.php"; ?>
