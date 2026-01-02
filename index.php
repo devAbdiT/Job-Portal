@@ -9,7 +9,15 @@ $select = $conn->prepare("SELECT *FROM jobs WHERE status=1 ORDER BY created_at D
 $select->execute();
 
 $jobs = $select->fetchAll(PDO::FETCH_OBJ);
+
+
+//Trending Key
+$search = $conn->prepare("SELECT COUNT(keyword) AS count, keyword FROM searches GROUP BY keyword ORDER BY count DESC LIMIT 4");
+$search->execute();
+
+$allSearches = $search->fetchAll(PDO::FETCH_OBJ);
 ?>
+
 
 
 <?php
@@ -80,9 +88,9 @@ require "includes/header.php";
             <div class="col-md-12 popular-keywords">
               <h3>Trending Keywords:</h3>
               <ul class="keywords list-unstyled m-0 p-0">
-                <li><a href="#" class="">UI Designer</a></li>
-                <li><a href="#" class="">Python</a></li>
-                <li><a href="#" class="">Developer</a></li>
+                <?php foreach ($allSearches as $search) : ?>
+                  <li><a href="#" class=""><?php echo $search->keyword; ?></a></li>
+                <?php endforeach; ?>
               </ul>
             </div>
           </div>
