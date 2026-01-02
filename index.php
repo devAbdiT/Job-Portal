@@ -33,29 +33,31 @@ require "includes/header.php";
             Cupiditate est, consequuntur perferendis.
           </p>
         </div>
-        <form method="post" class="search-jobs-form">
+        <form method="post" action="search.php" class="search-jobs-form">
           <div class="row mb-5">
             <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
               <input
+                name="job_title"
                 type="text"
                 class="form-control form-control-lg"
-                placeholder="Job title, Company..." />
+                placeholder="Job title" />
             </div>
-            <!-- <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
-                  <select class="selectpicker" data-style="btn-white btn-lg" data-width="100%" data-live-search="true" title="Select Region">
-                    <option>Anywhere</option>
-                    <option>San Francisco</option>
-                    <option>Palo Alto</option>
-                    <option>New York</option>
-                    <option>Manhattan</option>
-                    <option>Ontario</option>
-                    <option>Toronto</option>
-                    <option>Kansas</option>
-                    <option>Mountain View</option>
-                  </select>
-                </div> -->
+            <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
+              <select class="selectpicker" name="job_region" data-style="btn-white btn-lg" data-width="100%" data-live-search="true" title="Select Region">
+                <option>Anywhere</option>
+                <option>San Francisco</option>
+                <option>Palo Alto</option>
+                <option>New York</option>
+                <option>Manhattan</option>
+                <option>Ontario</option>
+                <option>Toronto</option>
+                <option>Kansas</option>
+                <option>Mountain View</option>
+              </select>
+            </div>
             <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
               <select
+                name="job_type"
                 class="selectpicker"
                 data-style="btn-white btn-lg"
                 data-width="100%"
@@ -67,6 +69,7 @@ require "includes/header.php";
             </div>
             <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
               <button
+                name="submit"
                 type="submit"
                 class="btn btn-primary btn-lg btn-block text-white btn-search">
                 <span class="icon-search icon mr-2"></span>Search Job
