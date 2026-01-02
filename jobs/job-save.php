@@ -7,20 +7,29 @@ if (isset($_GET['job_id']) and isset($_GET['worker_id']) and isset($_GET['status
     $worker_id = $_GET['worker_id'];
     $status = $_GET['status'];
 
-    $insert = $conn->prepare("INSERT INTO saved_jobs (
+    if ($status == 'save') {
+
+        $insert = $conn->prepare("INSERT INTO saved_jobs (
             job_id, 
             worker_id
         ) VALUES (
             :job_id, 
-            :worker_id 
-            
+            :worker_id  
         )");
 
-    $insert->execute([
-        ':worker_id' => $worker_id,
-        ':job_id' => $job_id
-    ]);
-    header("location:" . APPURL . "jobs/job-single.php?id=" . $job_id . "");
+        $insert->execute([
+            ':worker_id' => $worker_id,
+            ':job_id' => $job_id
+        ]);
+        header("location:" . APPURL . "jobs/job-single.php?id=" . $job_id . "");
+    } else {
+        $delete = $conn->prepare("DELETE FROM saved_jobs WHERE job_id=:job_id AND worker_id=:worker_id");
+        $delete->execute([
+            ':worker_id' => $worker_id,
+            ':job_id' => $job_id
+        ]);
+        header("location:" . APPURL . "jobs/job-single.php?id=" . $job_id . "");
+    }
 }
 
 ?>

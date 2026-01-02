@@ -60,25 +60,25 @@ if (isset($_POST['submit_application'])) {
   //header("location:" . APPURL . "jobs/job-single.php?id=" . $id . "");
 }
 //Saving Job
-if (isset($_POST['submit_save'])) {
-  $worker_id = $_POST['worker_id'];
-  $job_id = $_POST['job_id'];
+// if (isset($_POST['submit_save'])) {
+//   $worker_id = $_POST['worker_id'];
+//   $job_id = $_POST['job_id'];
 
-  $saved_jobs = $conn->prepare("INSERT INTO saved_jobs (
-            job_id, 
-            worker_id
-        ) VALUES (
-            :job_id, 
-            :worker_id 
-            
-        )");
+//   $saved_jobs = $conn->prepare("INSERT INTO saved_jobs (
+//             job_id, 
+//             worker_id
+//         ) VALUES (
+//             :job_id, 
+//             :worker_id 
 
-  $saved_jobs->execute([
-    ':worker_id' => $worker_id,
-    ':job_id' => $job_id
-  ]);
-  echo "<script> alert('Application saved successfully');</script>";
-}
+//         )");
+
+//   $saved_jobs->execute([
+//     ':worker_id' => $worker_id,
+//     ':job_id' => $job_id
+//   ]);
+//   echo "<script> alert('Application saved successfully');</script>";
+// }
 
 //checking for worker application
 $checking_for_application = $conn->prepare("SELECT *FROM job_applications WHERE worker_id=:worker_id AND job_id=:job_id");
@@ -89,7 +89,16 @@ $checking_for_application->execute(
   ]
 );
 
-echo $checking_for_application->rowCount();
+// echo $checking_for_application->rowCount();
+
+//Checking for saved jobs
+$checking_for_saved_jobs = $conn->prepare("SELECT *FROM saved_jobs WHERE worker_id=:worker_id AND job_id=:job_id");
+$checking_for_saved_jobs->execute(
+  [
+    ':worker_id' => $_SESSION['id'],
+    ':job_id' => $id
+  ]
+);
 ?>
 
 <?php
@@ -168,9 +177,16 @@ require "../includes/header.php";
             <?php if (isset($_SESSION['type']) and $_SESSION['type'] == "Worker"): ?>
               <div class="row mb-5">
 
-                <div class="col-6">
-                  <a href="job-save.php?job_id=<?php echo $id; ?>&worker_id=<?php echo $_SESSION['id'] ?>&status=save" class="btn btn-block btn-light btn-md"><i class="icon-heart"></i> Save Job</a>
-                </div>
+                <!-- CHecking for saved job and removing them -->
+                <?php if ($checking_for_saved_jobs->rowCount() == 0): ?>
+                  <div class="col-6">
+                    <a href="job-save.php?job_id=<?php echo $id; ?>&worker_id=<?php echo $_SESSION['id'] ?>&status=save" class="btn btn-block btn-light btn-md"><i class="icon-heart"></i> Save Job</a>
+                  </div>
+                <?php else: ?>
+                  <div class="col-6">
+                    <a href="job-save.php?job_id=<?php echo $id; ?>&worker_id=<?php echo $_SESSION['id'] ?>&status=delete" class="btn btn-block btn-light btn-md"><i class="icon-delete text-danger"></i> Remove From Save</a>
+                  </div>
+                <?php endif; ?>
 
 
                 <!-- checking if it already applied to the job before-->
