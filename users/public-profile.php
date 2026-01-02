@@ -89,7 +89,7 @@ require "../includes/header.php";
 <section class="site-section">
     <div class="container">
 
-        <?php if (isset($_SESSION['type']) and $_SESSION['type'] == "Company"): ?>
+        <?php if (isset($_SESSION['type']) and $_SESSION['type'] == "Company" and $_SESSION['id'] == $id): ?>
             <div class="row mb-5 justify-content-center">
                 <div class="col-md-7 text-center">
                     <h2 class="section-title mb-2">Jobs Posted by this Company</h2>
