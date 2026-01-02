@@ -83,6 +83,10 @@ if (!defined('APPURL')) {
                                         <?php if (isset($_SESSION['type']) and $_SESSION['type'] == "Worker") : ?>
                                             <a class="dropdown-item" href="<?php echo APPURL ?>users/saved_jobs.php?id=<?php echo $_SESSION['id']; ?>">Saved jobs</a>
                                         <?php endif; ?>
+                                        <!-- To display for Company only -->
+                                        <?php if (isset($_SESSION['type']) and $_SESSION['type'] == "Company") : ?>
+                                            <a class="dropdown-item" href="<?php echo APPURL ?>users/show-applicants.php?id=<?php echo $_SESSION['id']; ?>">Show Applicants </a>
+                                        <?php endif; ?>
                                         <div class="dropdown-divider"></div>
                                         <a class="dropdown-item" href="<?php echo APPURL ?>/auth/logout.php">Logout</a>
                                     </div>
