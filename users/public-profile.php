@@ -107,7 +107,7 @@ require "../includes/header.php";
 
                         <!-- $profile->img; -->
                         <img
-                            src="./user-images/<?php echo $_SESSION['image']; ?>"
+                            src="./user-images/<?php echo $oneJob->company_image; ?>"
                             alt="Free Website Template by Free-Template.co"
                             class="img-fluid" />
                     </div>
@@ -117,7 +117,7 @@ require "../includes/header.php";
                         <div
                             class="job-listing-position custom-width w-50 mb-3 mb-sm-0">
                             <h2><?php echo $oneJob->job_title; ?></h2>
-                            <strong><?php echo $_SESSION['username'] ?></strong>
+                            <strong><?php echo $oneJob->company_name; ?></strong>
                         </div>
                         <div
                             class="job-listing-location mb-3 mb-sm-0 custom-width w-25">

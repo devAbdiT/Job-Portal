@@ -1,16 +1,14 @@
-<!-- displaying Job seeker -->
+<!-- displaying Companies -->
 <?php
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-
-
 require "../config/config.php";
 
 $select = $conn->prepare("SELECT * FROM users WHERE type=:type");
-$select->execute([':type' => 'Worker']);
+$select->execute([':type' => 'Company']);
 
-$allWorkers = $select->fetchAll(PDO::FETCH_OBJ);
+$allCompanies = $select->fetchAll(PDO::FETCH_OBJ);
 
 ?>
 <?php require "../includes/header.php"; ?>
@@ -19,10 +17,10 @@ $allWorkers = $select->fetchAll(PDO::FETCH_OBJ);
     <div class="container">
         <div class="row">
             <div class="col-md-7">
-                <h1 class="text-white font-weight-bold">Workers</h1>
+                <h1 class="text-white font-weight-bold">Companies</h1>
                 <div class="custom-breadcrumbs">
                     <a href="<?php echo APPURL; ?>">Home</a> <span class="mx-2 slash">/</span>
-                    <span class="text-white"><strong>Workers</strong></span>
+                    <span class="text-white"><strong>Companies</strong></span>
                 </div>
             </div>
         </div>
@@ -33,14 +31,14 @@ $allWorkers = $select->fetchAll(PDO::FETCH_OBJ);
 <section class="site-section" style="" id="home-section">
     <div class="container">
         <div class="row">
-            <?php foreach ($allWorkers as $worker): ?>
+            <?php foreach ($allCompanies as $company): ?>
                 <div class="col-md-4 ">
                     <div class="card" style="width: 18rem;">
-                        <img class="card-img-top" style="height:200px; 18rem;" src="../users/user-images/<?php echo $worker->img; ?>" alt="<?php echo $worker->img; ?>">
+                        <img class="card-img-top" style="height:200px; 18rem;" src="../users/user-images/<?php echo $company->img; ?>" alt="<?php echo $company->img; ?>">
                         <div class="card-body">
-                            <h5 class="card-title"><?php echo $worker->username; ?></h5>
-                            <p class="card-text"><?php echo $worker->bio; ?></p>
-                            <a target="_blank" href="../users/public-profile.php?id=<?php echo $worker->id; ?>" class="btn btn-primary">Go to Profile</a>
+                            <h5 class="card-title"><?php echo $company->username; ?></h5>
+                            <p class="card-text"><?php echo $company->bio; ?></p>
+                            <a target="_blank" href="../users/public-profile.php?id=<?php echo $company->id; ?>" class="btn btn-primary">Go to Profile</a>
                         </div>
                     </div>
                     <br>

@@ -1,4 +1,8 @@
-<?php require "../config/config.php";
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+require "../config/config.php";
 
 
 if (isset($_GET['name'])) {

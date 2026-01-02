@@ -65,6 +65,8 @@ if (!defined('APPURL')) {
                             ">Contact</a></li>
                             <li><a href="<?php echo APPURL; ?>general/workers.php
                             ">Workers</a></li>
+                            <li><a href="<?php echo APPURL; ?>general/companies.php
+                            ">Companies</a></li>
 
 
 
