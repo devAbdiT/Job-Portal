@@ -63,6 +63,9 @@ if (!defined('APPURL')) {
                             <li><a href=" <?php echo APPURL; ?>about.php">About</a></li>
                             <li><a href="<?php echo APPURL; ?>contact.php
                             ">Contact</a></li>
+                            <li><a href="<?php echo APPURL; ?>general/workers.php
+                            ">Workers</a></li>
+
 
 
 
