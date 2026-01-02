@@ -13,6 +13,11 @@ if (isset($_POST['submit'])) {
         $job_region = $_POST['job_region'];
         $job_type = $_POST['job_type'];
 
+
+        //doing trending keywords
+        $insert = $conn->prepare("INSERT INTO searches (keyword) VALUES(:keyword)");
+        $insert->execute([':keyword' => $job_title]);
+
         $search = $conn->prepare("SELECT * FROM jobs WHERE job_title LIKE ? AND job_region LIKE ? AND job_type LIKE ? AND status = 1");
         $search->execute(["%$job_title%", "%$job_region%", "%$job_type%"]);
 
