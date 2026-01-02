@@ -265,7 +265,9 @@ require "../includes/header.php";
             <h3 class="text-primary  mt-3 h5 pl-3 mb-3 ">Category</h3>
             <ul class="list-unstyled pl-3 mb-0">
               <?php foreach ($allCategories as $category): ?>
-                <li class="mb-2"><strong class="text-black"><?php echo $category->name; ?></li>
+                <a target="_blank" syle="text-decoration:none;" href="<?php echo APPURL; ?>/categories/show-jobs.php?name=<?php echo $category->name; ?>">
+                  <li class="mb-2"><strong class="text-black"><?php echo ucfirst($category->name); ?></li>
+                </a>
               <?php endforeach; ?>
             </ul>
           </div>
