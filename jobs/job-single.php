@@ -59,27 +59,33 @@ if (isset($_POST['submit_application'])) {
 
   //header("location:" . APPURL . "jobs/job-single.php?id=" . $id . "");
 }
+//Only for looged in 
+if (isset($_SESSION['id'])) {
+
+  //checking for worker application
+  $checking_for_application = $conn->prepare("SELECT *FROM job_applications WHERE worker_id=:worker_id AND job_id=:job_id");
+  $checking_for_application->execute(
+    [
+      ':worker_id' => $_SESSION['id'],
+      ':job_id' => $id
+    ]
+  );
 
 
-//checking for worker application
-$checking_for_application = $conn->prepare("SELECT *FROM job_applications WHERE worker_id=:worker_id AND job_id=:job_id");
-$checking_for_application->execute(
-  [
-    ':worker_id' => $_SESSION['id'],
-    ':job_id' => $id
-  ]
-);
 
-// echo $checking_for_application->rowCount();
+  //Checking for saved jobs
+  $checking_for_saved_jobs = $conn->prepare("SELECT *FROM saved_jobs WHERE worker_id=:worker_id AND job_id=:job_id");
+  $checking_for_saved_jobs->execute(
+    [
+      ':worker_id' => $_SESSION['id'],
+      ':job_id' => $id
+    ]
+  );
+}
 
-//Checking for saved jobs
-$checking_for_saved_jobs = $conn->prepare("SELECT *FROM saved_jobs WHERE worker_id=:worker_id AND job_id=:job_id");
-$checking_for_saved_jobs->execute(
-  [
-    ':worker_id' => $_SESSION['id'],
-    ':job_id' => $id
-  ]
-);
+
+
+
 
 //Getting categories
 
@@ -248,6 +254,7 @@ require "../includes/header.php";
               <li class="mb-2"><strong class="text-black">Salary:</strong><?php echo $row->salary; ?></li>
               <li class="mb-2"><strong class="text-black">Gender:</strong> <?php echo $row->gender; ?></li>
               <li class="mb-2"><strong class="text-black">Application Deadline:</strong> <?php echo date('M', strtotime($row->application_deadline)) . ',' . date('d', strtotime($row->application_deadline)) . ',' . date('Y', strtotime($row->application_deadline)); ?></li>
+              <li class="mb-2"><strong class="text-black">Job Category:</strong> <?php echo $row->job_category; ?></li>
             </ul>
           </div>
 
