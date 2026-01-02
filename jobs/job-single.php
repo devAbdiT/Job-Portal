@@ -59,26 +59,7 @@ if (isset($_POST['submit_application'])) {
 
   //header("location:" . APPURL . "jobs/job-single.php?id=" . $id . "");
 }
-//Saving Job
-// if (isset($_POST['submit_save'])) {
-//   $worker_id = $_POST['worker_id'];
-//   $job_id = $_POST['job_id'];
 
-//   $saved_jobs = $conn->prepare("INSERT INTO saved_jobs (
-//             job_id, 
-//             worker_id
-//         ) VALUES (
-//             :job_id, 
-//             :worker_id 
-
-//         )");
-
-//   $saved_jobs->execute([
-//     ':worker_id' => $worker_id,
-//     ':job_id' => $job_id
-//   ]);
-//   echo "<script> alert('Application saved successfully');</script>";
-// }
 
 //checking for worker application
 $checking_for_application = $conn->prepare("SELECT *FROM job_applications WHERE worker_id=:worker_id AND job_id=:job_id");
@@ -99,6 +80,13 @@ $checking_for_saved_jobs->execute(
     ':job_id' => $id
   ]
 );
+
+//Getting categories
+
+$categories = $conn->query("SELECT *FROM categories");
+$categories->execute();
+
+$allCategories = $categories->fetchAll(PDO::FETCH_OBJ);
 ?>
 
 <?php
@@ -271,6 +259,15 @@ require "../includes/header.php";
               <a href="https://X.com/intent/tweet?text=<?php echo $row->job_title; ?>&url=<?php echo APPURL; ?>jobs/job-single.php?id=<?php echo $row->id; ?>" class="pt-3 pb-3 pr-3 pl-0"><span class="icon-twitter"></span></a>
               <a href="https://www.linkedin.com/sharing/share-offsite/?url=<?php echo APPURL; ?>jobs/job-single.php?id=<?php echo $row->id; ?>" class="pt-3 pb-3 pr-3 pl-0"><span class="icon-linkedin"></span></a>
             </div>
+          </div>
+
+          <div class="bg-light p-3 border rounded mb-4 mt-4">
+            <h3 class="text-primary  mt-3 h5 pl-3 mb-3 ">Category</h3>
+            <ul class="list-unstyled pl-3 mb-0">
+              <?php foreach ($allCategories as $category): ?>
+                <li class="mb-2"><strong class="text-black"><?php echo $category->name; ?></li>
+              <?php endforeach; ?>
+            </ul>
           </div>
 
         </div>

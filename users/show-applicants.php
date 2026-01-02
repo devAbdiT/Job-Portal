@@ -58,14 +58,14 @@ if (isset($_GET['id'])) {
 
                     <div class="d-sm-flex custom-width w-100 justify-content-between mx-4">
                         <div class="job-listing-position custom-width w-50 mb-3 mb-sm-0">
-                            <h2><?php echo $jobApp->job_title; ?></h2>
+                            <h5><?php echo $jobApp->job_title; ?></h5>
                             <strong></strong>
                         </div>
 
 
                         <div class="job-listing-meta">
                             <a style="text-decoration: none;" target="_blank" class="" href="<?php echo APPURL; ?>users/public-profile.php?id=<?php echo $jobApp->worker_id; ?>">
-                                <h2><?php echo $jobApp->email; ?></h2>
+                                <h5><?php echo $jobApp->email; ?></h5>
                             </a>
                         </div>
 
