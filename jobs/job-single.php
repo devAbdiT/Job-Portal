@@ -27,7 +27,12 @@ if (isset($_GET['id'])) {
   $job_num = $job_count->fetch(PDO::FETCH_OBJ);
   //Submiting Job Applictaion
 
+} else {
+  header("location:" . APPURL . "404.php");
 }
+
+
+//Submiiting Applicatio
 if (isset($_POST['submit_application'])) {
   $username = $_POST['username'];
   $email = $_POST['email'];

@@ -30,6 +30,8 @@ if (isset($_GET['job_id']) and isset($_GET['worker_id']) and isset($_GET['status
         ]);
         header("location:" . APPURL . "jobs/job-single.php?id=" . $job_id . "");
     }
+} else {
+    header("location:" . APPURL . "404.php");
 }
 
 ?>

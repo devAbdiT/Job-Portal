@@ -7,7 +7,8 @@ if (isset($_POST['submit'])) {
     // echo "submitted";
 
     if (empty($_POST['job_title']) or empty($_POST['job_region']) or empty($_POST['job_type'])) {
-        echo "<script>alert('one input or more are empty')</script>";
+
+        header("location:" . APPURL . "");
     } else {
         $job_title = $_POST['job_title'];
         $job_region = $_POST['job_region'];
