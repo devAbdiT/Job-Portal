@@ -73,16 +73,92 @@ if (isset($_GET['upd_id'])) {
                     ':cv' => $row->cv,
                     ':id' => $id
                 ]);
-                header("Location:" . APPURL . "");
+                // header("Location:" . APPURL . "");
             }
             if (move_uploaded_file($_FILES['img']['tmp_name'], $dir_img) and move_uploaded_file($_FILES['cv']['tmp_name'], $dir_cv)) {
                 header("Location:" . APPURL . "");
             }
+            header("Location:" . APPURL . "");
         }
     }
 } else {
     echo "404";
 }
+
+
+// if (isset($_POST['submit'])) {
+//         if (empty($_POST['username']) or empty($_POST['email'])) {
+//             echo "<script>alert('username or email are empty')</script>";
+//         } else {
+//             $username = $_POST['username'];
+//             $email = $_POST['email'];
+//             $title = $_POST['title'];
+//             $bio = $_POST['bio'];
+//             $facebook = $_POST['facebook'];
+//             $twitter = $_POST['twitter'];
+//             $linkedin = $_POST['linkedin'];
+//             $img = $_FILES['img']['name'];
+
+//             // Fix CV logic
+//             if ($row->type == "Worker") {
+//                 $cv = $_FILES['cv']['name'];
+//             } else {
+//                 $cv = NULL;  // Use NULL, not string "NULL"
+//             }
+
+//             $dir_img = 'user-images/' . basename($img);
+//             $dir_cv = 'user-cvs/' . basename($cv);
+
+//             $update = $conn->prepare("UPDATE users SET username=:username, email=:email, title=:title, bio=:bio, facebook=:facebook, twitter=:twitter, linkedin=:linkedin, img=:img, cv=:cv WHERE id=:id");
+
+//             // SIMPLE FIX: Handle each file separately
+//             $final_img = $row->img;  // Start with old image
+//             $final_cv = $row->cv;    // Start with old CV
+
+//             // Handle image upload if provided
+//             if (!empty($img)) {
+//                 if (move_uploaded_file($_FILES['img']['tmp_name'], $dir_img)) {
+//                     // Delete old image if exists and new one uploaded
+//                     if (!empty($row->img) && file_exists("user-images/" . $row->img)) {
+//                         unlink("user-images/" . $row->img);
+//                     }
+//                     $final_img = $img;
+//                 }
+//             }
+
+//             // Handle CV upload if provided and user is Worker
+//             if ($row->type == "Worker" && !empty($cv)) {
+//                 if (move_uploaded_file($_FILES['cv']['tmp_name'], $dir_cv)) {
+//                     // Delete old CV if exists
+//                     if (!empty($row->cv) && file_exists("user-cvs/" . $row->cv)) {
+//                         unlink("user-cvs/" . $row->cv);
+//                     }
+//                     $final_cv = $cv;
+//                 }
+//             }
+
+//             // Update database with final values
+//             $update->execute([
+//                 ':username' => $username,
+//                 ':email' => $email,
+//                 ':title' => $title,
+//                 ':bio' => $bio,
+//                 ':facebook' => $facebook,
+//                 ':twitter' => $twitter,
+//                 ':linkedin' => $linkedin,
+//                 ':img' => $final_img,
+//                 ':cv' => $final_cv,
+//                 ':id' => $id
+//             ]);
+
+//             header("Location:" . APPURL . "");
+//             exit();
+//         }
+//     }
+// } else {
+//     echo "404";
+//     exit();
+// }
 ?>
 
 
