@@ -15,6 +15,9 @@ try {
 if (!defined('APPURL')) {
     define("APPURL", "http://localhost:3000/jobboard/");
 }
+if (!defined("ADMINURL")) {
+    define("ADMINURL", "http://localhost:3000/jobboard/admin-panel/");
+}
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }

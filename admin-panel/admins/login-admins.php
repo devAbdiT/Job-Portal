@@ -1,9 +1,13 @@
-<?php require "../../config/config.php";
-
-
-// if (isset($_SESSION['username'])) {
-//   header("location:" . APPURL . "");
+<?php
+// if (session_status() === PHP_SESSION_NONE) {
+//   session_start();
 // }
+require "../../config/config.php";
+
+//Going back to admin home page if already logged in
+if (isset($_SESSION['adminname'])) {
+  header("location:" . ADMINURL . "");
+}
 if (isset($_POST['submit'])) {
   if (empty($_POST['email']) or empty($_POST['password'])) {
     echo "<script>alert('some inputs are empty')</script>";
@@ -26,12 +30,11 @@ if (isset($_POST['submit'])) {
     $select = $login->fetch(PDO::FETCH_ASSOC);
     if ($login->rowCount() > 0) {
       if (password_verify($password, $select['mypassword'])) {
-        // $_SESSION['username'] = $select['username'];
-        // $_SESSION['email'] = $select['email'];
+        $_SESSION['adminname'] = $select['adminname'];
+        $_SESSION['email'] = $select['email'];
 
 
-        // header("Location: " . APPURL . "/");
-        echo "<script>alert('Logged In')</script>";
+        header("Location: " . ADMINURL . "");
       } else {
         echo "<script>alert('Invalid user')</script>";
       }
