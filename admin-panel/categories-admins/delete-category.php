@@ -1,0 +1,17 @@
+<?php
+require "../../config/config.php";
+
+
+if (isset($_GET['id'])) {
+    $id = $_GET['id'];
+
+    $delete = $conn->prepare("DELETE FROM categories WHERE id=:id");
+    $delete->execute([':id' => $id]);
+    header("location:" . ADMINURL . "categories-admins/show-categories.php");
+} else {
+    header("location: http://localhost:3000/jobboard/404.php");
+}
+?>
+
+<?php require "../layouts/header.php";  ?>
+<?php require "../layouts/footer.php";  ?>
