@@ -1,6 +1,11 @@
 <?php
 require "../config/config.php";
 
+//if session not set got to logiin page
+if (!isset($_SESSION['adminname'])) {
+  header("location:" . ADMINURL . "admins/login-admins.php");
+}
+
 //For counting Jobs
 $jobs = $conn->query("SELECT COUNT(*) AS count_jobs FROM jobs");
 $jobs->execute();
