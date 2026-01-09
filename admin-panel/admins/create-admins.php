@@ -1,6 +1,7 @@
 <?php
 require "../../config/config.php";
 
+//Inorder not to allow everybody to  enter to this page 
 
 //login ketederege behoala endegena register bineka 
 if (!isset($_SESSION['adminname'])) {

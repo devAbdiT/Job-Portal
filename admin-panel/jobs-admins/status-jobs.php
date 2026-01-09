@@ -2,6 +2,11 @@
 require "../../config/config.php";
 
 
+//Inorder not to allow everybody to  enter to this page 
+if (!isset($_SESSION['adminname'])) {
+    header("location:" . ADMINURL . "admins/login-admins.php");
+}
+
 if (isset($_GET['id']) and isset($_GET['status'])) {
     $id = $_GET['id'];
     $status = $_GET['status'];

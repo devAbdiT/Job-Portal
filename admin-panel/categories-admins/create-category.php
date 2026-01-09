@@ -1,6 +1,8 @@
 <?php
 require "../../config/config.php";
-
+if (!isset($_SESSION['adminname'])) {
+  header("location:" . ADMINURL . "admins/login-admins.php");
+}
 if (isset($_POST['submit'])) {
   if (empty($_POST['name'])) {
     echo "<script>alert('input is empty');</script>";

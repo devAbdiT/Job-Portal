@@ -1,5 +1,9 @@
 <?php
 require "../../config/config.php";
+//Inorder not to allow everybody to  enter to this page 
+if (!isset($_SESSION['adminname'])) {
+  header("location:" . ADMINURL . "admins/login-admins.php");
+}
 // FIX: Added database query to fetch admins
 $select = $conn->query("SELECT * FROM categories");
 $categories = $select->fetchAll(PDO::FETCH_OBJ);

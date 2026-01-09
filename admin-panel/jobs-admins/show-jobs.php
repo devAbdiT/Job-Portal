@@ -1,6 +1,10 @@
 <?php
 require "../../config/config.php";
 
+//Inorder not to allow everybody to  enter to this page 
+if (!isset($_SESSION['adminname'])) {
+  header("location:" . ADMINURL . "admins/login-admins.php");
+}
 $select = $conn->query("SELECT * FROM jobs");
 $jobs = $select->fetchAll(PDO::FETCH_OBJ);
 ?>
