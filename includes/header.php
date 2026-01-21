@@ -2,7 +2,7 @@
 // session_start();
 // define("APPURL", "http://localhost:3000/jobboard");
 if (!defined('APPURL')) {
-    define("APPURL", "http://localhost:3000/jobboard/");
+    define("APPURL", "http://localhost/jobboard/");
 }
 ?>
 <!DOCTYPE html>
@@ -33,12 +33,7 @@ if (!defined('APPURL')) {
 </head>
 
 <body id="top">
-    <!-- <div id="overlayer"></div>
-    <div class="loader">
-        <div class="spinner-border text-primary" role="status">
-            <span class="sr-only">Loading...</span>
-        </div>
-    </div> -->
+
 
     <div class="site-wrap">
         <div class="site-mobile-menu site-navbar-target">

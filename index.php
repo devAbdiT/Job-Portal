@@ -5,7 +5,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
 require "config/config.php";
 
-$select = $conn->prepare("SELECT *FROM jobs WHERE status=1 ORDER BY created_at DESC LIMIT 5");
+$select = $conn->prepare("SELECT * FROM jobs WHERE status=1 ORDER BY created_at DESC LIMIT 5");
 $select->execute();
 
 $jobs = $select->fetchAll(PDO::FETCH_OBJ);
@@ -158,7 +158,7 @@ require "includes/header.php";
   <div class="container">
     <div class="row mb-5 justify-content-center">
       <div class="col-md-7 text-center">
-        <h2 class="section-title mb-2">43,167 Job Listed</h2>
+        <h2 class="section-title mb-2">Jobs Listed</h2>
       </div>
     </div>
 

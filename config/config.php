@@ -13,10 +13,10 @@ try {
 
 // define("APPURL", "http://localhost:3000/jobboard");
 if (!defined('APPURL')) {
-    define("APPURL", "http://localhost:3000/jobboard/");
+    define("APPURL", "http://localhost/jobboard/");
 }
 if (!defined("ADMINURL")) {
-    define("ADMINURL", "http://localhost:3000/jobboard/admin-panel/");
+    define("ADMINURL", "http://localhost/jobboard/admin-panel/");
 }
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
