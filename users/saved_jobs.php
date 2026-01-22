@@ -65,8 +65,8 @@ if (isset($_GET['id'])) {
 
                         <!-- $profile->img; -->
                         <img
-                            src="./user-images/<?php echo $oneJob->company_image; ?>"
-                            alt="Free Website Template by Free-Template.co"
+                            src="./user-images/<?php echo $profile->img; ?>"
+                            alt="<?php echo $profile->img; ?>"
                             class="img-fluid" />
                     </div>
 

@@ -107,7 +107,7 @@ require "../includes/header.php";
 
                         <!-- $profile->img; -->
                         <img
-                            src="./user-images/<?php echo $oneJob->company_image; ?>"
+                            src="./user-images/<?php echo $profile->img; ?>"
                             alt="Free Website Template by Free-Template.co"
                             class="img-fluid" />
                     </div>
